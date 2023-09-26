@@ -1,16 +1,18 @@
 const path = require('path');
 const getPath = (pathStr) => path.resolve(__dirname, pathStr);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-console.log('webpack');
+
 module.exports = {
   mode: 'development',
   entry: [
     getPath('./src/index.js'),
   ],
-  // output: {
-  //   path: path.resolve(__dirname, 'dist'),
-  //   filename: 'bundle.js',
-  // },
+  output: {
+    path: path.resolve(__dirname, 'dist'), // 输出目录为dist文件夹
+    filename: 'static/js/[name].[hash].js', // 输出的JavaScript文件路径
+    clean: true, // 每次构建前清理dist文件夹
+    // publicPath: '/', // 添加publicPath，确保正确的资源路径
+  },
   module: {
     rules: [
       {
@@ -19,8 +21,8 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: 'images', // 可选，指定输出目录
+              name: '[name].[hash:8].[ext]', 
+              outputPath: 'static/images', // 可选，指定输出目录
             },
           },
         ],
@@ -49,19 +51,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /\.css$/,
-      //   exclude: /node_modules/,
-      //   use: [
-      //     'style-loader',
-      //     {
-      //       loader: 'css-loader',
-      //       options: {
-      //         modules: true,
-      //       },
-      //     },
-      //   ],
-      // },
     ],
   },
   devServer: {
@@ -73,7 +62,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: getPath('public/index.html'), // 输入你的HTML模板路径
+      template: './public/index.html', // 使用public下的index.html作为模板
+      filename: 'index.html', // 输出的HTML文件名
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+      },
     }),
   ],
 };

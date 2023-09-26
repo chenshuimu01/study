@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import styles from './index.css'
+import styles from './index.css' // 导入样式文件
 
-// const trueIcon = require('../../images/trueIcon.png')
-// const falseIcon = require('../images/falseIcon.png')
 import trueIcon from '../../images/trueIcon.png'
 import falseIcon from '../../images/falseIcon.png'
+
 function Index() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [userAnswers, setUserAnswers] = useState(new Array(50).fill(''));
   const [results, setResults] = useState(new Array(50).fill(null));
+
+  // 生成随机的问题和答案
   const generateRandomNumbers = () => {
     const numberOfQuestions = 50; // 修改为您希望生成的问题数量
     const newQuestions = [];
@@ -43,20 +44,25 @@ function Index() {
     setResults(new Array(numberOfQuestions).fill(null));
   };
   
-  
-  useEffect(()=>{
+  useEffect(() => {
+    // 在组件加载时生成随机问题
     generateRandomNumbers()
-  },[])
-  
+  }, [])
 
   const handleSubmit = () => {
+    // 计算每个问题的结果并判断得分
     const newResults = answers.map((correctAnswer, index) => {
       const userAnswer = parseInt(userAnswers[index], 10);
       return userAnswer === correctAnswer;
     });
+
     console.log(newResults,'newResults');
+
+    // 计算正确答案的数量
     const count = newResults.filter(item => item === true).length;
     console.log(count);
+
+    // 根据得分弹出不同的提示
     if(count < count.length * 0.6) {
       alert('不及格哦，继续努力');
     } else if(count === count.length) {
@@ -64,19 +70,18 @@ function Index() {
     } else {
       alert(`恭喜你获得${count}分，继续加油吧`);
     }
+
+    // 更新结果状态
     setResults(newResults);
     setSubmitted(true);
   };
 
   const handleUserAnswerChange = (index, value) => {
+    // 处理用户输入的答案
     const newAnswers = [...userAnswers];
     newAnswers[index] = value;
     setUserAnswers(newAnswers);
   };
-  
-  useEffect(()=>{
-    console.log(userAnswers);
-  },[userAnswers])
 
   return (
     <div className={styles.main}>
@@ -86,23 +91,24 @@ function Index() {
       {questions.map((question, index) => (
         <div key={index}>
           <div className={styles.question}>
-          <div>{question}</div>
-          {!submitted && (
-            <input
-              type="number"
-              value={userAnswers[index]}
-              onChange={(e) => handleUserAnswerChange(index, e.target.value)}
-            />
+            <div>{question}</div>
+            {!submitted && (
+              <input
+                type="number"
+                value={userAnswers[index]}
+                onChange={(e) => handleUserAnswerChange(index, e.target.value)}
+              />
             )}
-          {submitted && (
-            <div>
-              答案：{answers[index]}
-            </div>
-          )}
-        </div>
+            {submitted && (
+              <div>
+                答案：{answers[index]}
+              </div>
+            )}
+          </div>
           { submitted && (
-            <div style={{display: 'flex', color: results[index] ? '#2bb66d' : '#da2a2a'}}>你的答案：{userAnswers[index]}
-            <img style={{width:'calc(40 / 32 * 1rem)'}} src={results[index]  ? trueIcon : falseIcon} alt="" />
+            <div style={{display: 'flex', color: results[index] ? '#2bb66d' : '#da2a2a'}}>
+              你的答案：{userAnswers[index]}
+              <img style={{width:'calc(40 / 32 * 1rem)'}} src={results[index]  ? trueIcon : falseIcon} alt="" />
             </div>
           )}
         </div>
