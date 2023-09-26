@@ -1,3 +1,24 @@
 .main {
+  padding: calc(40 / 32 * 1rem);
+}
+
+.question {
   display: flex;
+  align-items: center;
+  margin-top: calc(20 / 32 * 1rem);
+}
+
+.question > div:nth-child(1){
+  min-width: calc(200 / 32 * 1rem);
+}
+
+.question > input:nth-child(2) {
+  width: calc(100 / 32 * 1rem);
+  margin-left: calc(10 / 32 * 1rem);
+}
+
+.submitBtn {
+  position: fixed;
+  right: calc(100 / 32 * 1rem);
+  bottom: calc(100 / 32 * 1rem);
 }
