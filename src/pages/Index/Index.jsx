@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.css'
 
-// const trueIcon = require('../images/trueIcon.png')
+// const trueIcon = require('../../images/trueIcon.png')
 // const falseIcon = require('../images/falseIcon.png')
-import trueIcon from '../images/trueIcon.png'
-import falseIcon from '../images/falseIcon.png'
-function Main() {
+// import trueIcon from '../../images/trueIcon.png'
+// import falseIcon from '../../images/falseIcon.png'
+function Index() {
   console.log(styles);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [userAnswers, setUserAnswers] = useState(new Array(10).fill(''));
   const [results, setResults] = useState(new Array(10).fill(null));
-
   const generateRandomNumbers = () => {
     const numberOfQuestions = 10; // 修改为您希望生成的问题数量
     const newQuestions = [];
@@ -36,7 +35,6 @@ function Main() {
   
   
   useEffect(()=>{
-    console.log(1);
     generateRandomNumbers()
   },[])
   
@@ -62,7 +60,7 @@ function Main() {
       <button onClick={generateRandomNumbers}>生成试卷</button>
       <br />
       {questions.map((question, index) => (
-        <div className={styles.question} key={index}>
+        <div key={index}>
           <div>{question}</div>
           {!submitted && (
             <input
@@ -74,7 +72,7 @@ function Main() {
           {submitted && (
             <div>
               答案：{answers[index]}
-              <img style={{width:'calc(40 / 32 * 1rem)'}} src={results[index]  ? trueIcon : falseIcon} alt="" />
+              {/* <img style={{width:'calc(40 / 32 * 1rem)'}} src={results[index]  ? trueIcon : falseIcon} alt="" /> */}
             </div>
           )}
         </div>
@@ -87,4 +85,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Index;
