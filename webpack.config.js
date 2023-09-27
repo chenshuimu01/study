@@ -8,7 +8,7 @@ module.exports = {
     getPath('./src/index.js'),
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'), // 输出目录为dist文件夹
+    path: path.resolve(__dirname, process.env.outName || 'dist'), // 输出目录为dist文件夹
     filename: 'static/js/[name].[hash].js', // 输出的JavaScript文件路径
     clean: true, // 每次构建前清理dist文件夹
     publicPath: '', // 添加publicPath，确保正确的资源路径
@@ -45,7 +45,11 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]', // 生产：[hash:base64:5]
+                exportLocalsConvention: 'camelCase',
+              },
+              importLoaders: 1,
             },
           },
           'postcss-loader',
@@ -67,7 +71,11 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',// 生产：[hash:base64:5]
+                exportLocalsConvention: 'camelCase',
+              },
+              importLoaders: 1,
             },
           },
           'less-loader',

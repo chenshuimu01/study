@@ -11,7 +11,7 @@
 }
 
 .question > div:nth-child(1){
-  min-width: calc(200 / 32 * 1rem);
+  min-width: calc(250 / 32 * 1rem);
 }
 
 .question > .answerInput {
