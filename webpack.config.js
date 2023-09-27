@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), // 输出目录为dist文件夹
     filename: 'static/js/[name].[hash].js', // 输出的JavaScript文件路径
     clean: true, // 每次构建前清理dist文件夹
-    // publicPath: '/', // 添加publicPath，确保正确的资源路径
+    publicPath: '', // 添加publicPath，确保正确的资源路径
   },
   module: {
     rules: [
@@ -64,10 +64,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html', // 使用public下的index.html作为模板
       filename: 'index.html', // 输出的HTML文件名
-      hash: true,
-      minify: {
-        collapseWhitespace: true,
-      },
+      // hash: true,
+      // minify: {
+      //   collapseWhitespace: true,
+      // },
     }),
   ],
 };
