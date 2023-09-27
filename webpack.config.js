@@ -39,16 +39,47 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // include: /node_modules/,
+        exclude: /node_modules/,
         use: [
           'style-loader', 
-          // 'css-loader',
           {
             loader: 'css-loader',
             options: {
               modules: true,
             },
           },
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        use: [
+          'style-loader', 
+          'css-loader',
+        ],
+      },
+      // less
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+          'less-loader',
+        ],
+      },
+
+      {
+        test: /\.less$/,
+        include: /node_modules/,
+        use: [
+          'style-loader',
+          'less-loader',
         ],
       },
     ],

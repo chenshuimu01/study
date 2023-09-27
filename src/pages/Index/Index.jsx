@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import styles from './index.css' // 导入样式文件
+import { Button } from 'antd-mobile'
+import styles from './index.css'
 
 import trueIcon from '../../images/trueIcon.png'
 import falseIcon from '../../images/falseIcon.png'
@@ -86,37 +87,35 @@ function Index() {
   return (
     <div className={styles.main}>
       <h1>小学一年级加法试卷</h1>
-      <button onClick={generateRandomNumbers}>生成试卷</button>
-      <br />
       {questions.map((question, index) => (
         <div key={index}>
           <div className={styles.question}>
             <div>{question}</div>
             {!submitted && (
               <input
+                className={styles.answerInput}
                 type="number"
                 value={userAnswers[index]}
                 onChange={(e) => handleUserAnswerChange(index, e.target.value)}
               />
             )}
             {submitted && (
-              <div>
+              <div className={styles.answerText}>
                 答案：{answers[index]}
               </div>
             )}
           </div>
           { submitted && (
-            <div style={{display: 'flex', color: results[index] ? '#2bb66d' : '#da2a2a'}}>
+            <div className={styles.youAnswer} style={{color: results[index] ? '#2bb66d' : '#da2a2a'}}>
               你的答案：{userAnswers[index]}
-              <img style={{width:'calc(40 / 32 * 1rem)'}} src={results[index]  ? trueIcon : falseIcon} alt="" />
+              <img src={results[index]  ? trueIcon : falseIcon} alt="" />
             </div>
           )}
         </div>
       ))}
       <br />
-      {!submitted && (
-        <button className={styles.submitBtn} onClick={handleSubmit}>提交答案</button>
-      )}
+      {!submitted ? <Button color='success' fill='solid' className={styles.submitBtn} onClick={handleSubmit}>提交答案</Button>
+      : <Button className={styles.submitBtn}color='warning' onClick={generateRandomNumbers}>重新生成试卷</Button>}
     </div>
   );
 }

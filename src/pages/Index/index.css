@@ -1,24 +1,41 @@
 .main {
   padding: calc(40 / 32 * 1rem);
+  position: relative;
 }
 
 .question {
   display: flex;
   align-items: center;
-  margin-top: calc(20 / 32 * 1rem);
+  margin-top: calc(30 / 32 * 1rem);
+  font-size: calc(40 / 32 * 1rem);
 }
 
 .question > div:nth-child(1){
   min-width: calc(200 / 32 * 1rem);
 }
 
-.question > input:nth-child(2) {
+.question > .answerInput {
   width: calc(100 / 32 * 1rem);
   margin-left: calc(10 / 32 * 1rem);
 }
 
+.question .answerText {
+  color: #b99674;
+  font-size: calc(30 / 32 * 1rem);
+
+}
+
+.youAnswer {
+  display: flex;
+}
+
+.youAnswer > img:nth-child(1) {
+  width: calc(40 / 32 * 1rem);
+  margin-left: calc(40 / 32 * 1rem);
+}
+
 .submitBtn {
   position: fixed;
-  right: calc(100 / 32 * 1rem);
+  right: calc(50 / 32 * 1rem);
   bottom: calc(100 / 32 * 1rem);
 }
