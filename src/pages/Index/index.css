@@ -3,6 +3,23 @@
   position: relative;
 }
 
+.times {
+  position: fixed;
+  top: calc(80 / 32 * 1rem);
+  left: calc(550 / 32 * 1rem);
+  font-size: calc(36 / 32 * 1rem);
+  color: #b50000;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.times > span:nth-child(1) {
+  font-size: calc(40 / 32 * 1rem);
+  line-height: calc(40 / 32 * 1rem);
+  color: #ff3000;
+}
+
 .question {
   display: flex;
   align-items: center;

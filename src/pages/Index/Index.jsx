@@ -11,13 +11,17 @@ function Index() {
   const [questions, setQuestions] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [userAnswers, setUserAnswers] = useState(new Array(numberOfQuestions).fill(''));
+  const [times,setTimes] = useState(0);
 
   // 生成随机的问题和答案
   const generateRandomNumbers = (isScroll) => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' // 使用平滑滚动效果
-    });
+    if(isScroll) { // 重新开始的情况下
+      setTimes(0)
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 使用平滑滚动效果
+      });
+    }
     const newQuestions = Array.from({ length: numberOfQuestions }, () => {
       const num1 = Math.floor(Math.random() * numberMax) + 1; // 生成 1 到 numberMax 的随机数
       const num2 = Math.floor(Math.random() * numberMax) + 1;
@@ -34,12 +38,24 @@ function Index() {
     setUserAnswers(new Array(numberOfQuestions).fill(''));
   };
   
+  useEffect(()=>{
+    window.timer = setTimeout(() => {
+      if(times < 9999) {
+        setTimes(times + 1)
+      }
+    }, 1000);
+    return ()=> {
+      if(window.timer) clearTimeout(window.timer);
+    }
+  },[times])
+
   useEffect(() => {
     // 在组件加载时生成随机问题
-    generateRandomNumbers()
+    generateRandomNumbers();
   }, [])
 
   const handleSubmit = () => {
+    if(window.timer) clearTimeout(window.timer);
     // 计算每个问题的结果并判断得分
     const newResults = questions.map((item, index) => {
       const userAnswer = parseInt(userAnswers[index], 10);
@@ -51,11 +67,11 @@ function Index() {
     let contentText;
     // 根据得分弹出不同的提示
     if(count < questions.length * 0.6) {
-      contentText = '不及格哦，继续努力';
+      contentText = <>用时：{times}秒<br />获得{count}分<br />不及格哦，继续努力</>;
     } else if(count === questions.length) {
-      contentText = '太棒啦，你获得了满分！';
+      contentText = <>用时：{times}秒<br />太棒啦，你获得了满分！</>;
     } else {
-      contentText = `恭喜你获得${count}分，继续加油吧`;
+      contentText = <>用时：{times}秒<br />恭喜你获得${count}分，继续加油吧</>;
     }
 
     Modal.alert({
@@ -81,6 +97,7 @@ function Index() {
 
   return (
     <div className={styles.main}>
+      <div className={styles.times}>用时：<span>{times}</span></div>
       <h1>小学一年级加法试卷</h1>
       {questions.map((item, index) => (
         <div key={index}>
