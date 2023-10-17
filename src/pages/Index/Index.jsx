@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'antd-mobile'
+// import Test from '../test/test.jsx';
 import styles from './index.css'
 
 import trueIcon from '../../images/trueIcon.png'
@@ -12,6 +13,7 @@ function Index() {
   const [submitted, setSubmitted] = useState(false);
   const [userAnswers, setUserAnswers] = useState(new Array(numberOfQuestions).fill(''));
   const [times,setTimes] = useState(0);
+  // const [cNum,setCnum] = useState('49980');
 
   // 生成随机的问题和答案
   const generateRandomNumbers = (isScroll) => {
@@ -95,8 +97,19 @@ function Index() {
     setUserAnswers(newAnswers);
   };
 
+  // const test = () => {
+  //   console.log((+cNum+ 5).toString(),'sss');
+  //   setCnum((+cNum+5).toString())
+  // } 
+
   return (
     <div className={styles.main}>
+      {/* <Test
+        initNum={'49980'}
+        changeNum={cNum}
+        className={styles.test}
+        />
+      <div onClick={test}>按钮</div> */}
       <div className={styles.times}>用时：<span>{times}</span></div>
       <h1>小学一年级加法试卷</h1>
       {questions.map((item, index) => (

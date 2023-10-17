@@ -1,3 +1,8 @@
+.test{
+  color: red;
+  font-size: 28px;
+}
+
 .main {
   padding: calc(40 / 32 * 1rem);
   position: relative;
