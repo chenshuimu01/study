@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'antd-mobile'
-// import Test from '../test/test.jsx';
+// import NumberScroll from '../compoment/NumberScroll/NumberScroll.jsx';
 import styles from './index.css'
 
 import trueIcon from '../../images/trueIcon.png'
@@ -104,7 +104,8 @@ function Index() {
 
   return (
     <div className={styles.main}>
-      {/* <Test
+      {/* 测试数字滚动用 */}
+      {/* <NumberScroll
         initNum={'49980'}
         changeNum={cNum}
         className={styles.test}

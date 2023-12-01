@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import styles from './test.css'
-
+import styles from './numberScroll.css'
+// TODO:数字滚动组件
 /**
  * 
  * @param {*} props 
