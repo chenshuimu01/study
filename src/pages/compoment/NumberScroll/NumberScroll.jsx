@@ -12,7 +12,7 @@ import styles from './numberScroll.css'
  * className 最外层样式
  */
 
-function Test(props) {
+function NumberScroll(props) {
   const {initNum = '', changeNum, animationTime = '5', width = '50', height = '50',className} = props;
   const [rotateArr,setRotateArr] = useState([]);
   const [numArr,setNumArr] = useState(initNum.split(''));
@@ -88,4 +88,4 @@ function Test(props) {
   )
 }
 
-export default Test;
+export default NumberScroll;
